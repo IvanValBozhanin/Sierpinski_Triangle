@@ -4,7 +4,6 @@ import java.awt.*;
 import javax.swing.*;
 
 public class SierpinskiTriangleFrame extends JFrame {
-    static int r = 0, gr = 0, b = 255;
 
     private int n;
 

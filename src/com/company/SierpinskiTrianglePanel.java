@@ -1,11 +1,11 @@
 package com.company;
 
-import java.awt.Graphics;
-import java.awt.Point;
+import java.awt.*;
 
 import javax.swing.JPanel;
 
 public class SierpinskiTrianglePanel extends JPanel {
+    static double r = 0, gr = 150, b = 255;
     private int order = 0;
 
     /** Set a new order */
@@ -24,12 +24,15 @@ public class SierpinskiTrianglePanel extends JPanel {
         displayTriangles(g, order, p1, p2, p3);
     }
 
-    private static void displayTriangles(Graphics g, int order, Point p1, Point p2, Point p3) {
+    private void displayTriangles(Graphics g, int order, Point p1, Point p2, Point p3) {
         if (order == 0) {
             // Draw a triangle to connect three points
-            g.drawLine(p1.x, p1.y, p2.x, p2.y);
-            g.drawLine(p1.x, p1.y, p3.x, p3.y);
-            g.drawLine(p2.x, p2.y, p3.x, p3.y);
+            double r = (p1.x*p1.x + p1.y*p1.y);
+            double d = super.getWidth() * super.getWidth() + super.getHeight()*super.getHeight();
+            double rat = Math.sqrt(r/d);
+            System.out.println(r+ " " + d + " " + rat);
+            g.setColor(new Color((int) (100*rat), (int) (150*rat), (int)(255*rat)));
+            g.fillPolygon(new int[]{p1.x, p2.x, p3.x}, new int[]{p1.y, p2.y, p3.y}, 3);
         } else {
             // Get the midpoint on each edge of the triangle
             Point p12 = midpoint(p1, p2);
